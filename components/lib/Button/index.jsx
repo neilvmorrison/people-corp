@@ -10,9 +10,13 @@ const styles = createUseStyles((theme) => ({
     padding: '8px 16px',
     color: '#fff',
     fontSize: '1.1rem',
+    cursor: 'pointer',
   },
   grey: {
     background: theme.common.grey,
+  },
+  secondary: {
+    background: theme.colors.secondary,
   },
 }));
 
@@ -22,6 +26,9 @@ function Button({ children, disabled, variant, ...props }) {
     let variants = [];
     if (variant === 'grey') {
       variants.push(classes.grey);
+    }
+    if (variant === 'secondary') {
+      variants.push(classes.secondary);
     }
     return clsx(classes.root, variants);
   }

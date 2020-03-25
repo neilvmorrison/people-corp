@@ -44,7 +44,7 @@ function Calculator({ handleDecrease }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    alert(JSON.stringify(formData, null, 4));
   }
 
   return (
