@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import App from 'next/app';
+import Router from 'next/router';
 import { ThemeProvider } from 'react-jss';
 import defaultTheme from '../components/lib/theme';
 import NavBar from '../components/NavBar';
@@ -41,15 +43,22 @@ function makeTheme(colors) {
   const theme = {
     ...defaultTheme,
     colors: {
-      primary: colors.primary,
+      primary: colors.primary ? colors.primary : '#03A9F4',
       secondary: colors.secondary ? colors.secondary : '#FFC107',
     },
   };
   return theme;
 }
 
-function MyApp({ Component, colors, pageProps }) {
+function MyApp({ Component, colors, pageProps, subDomain }) {
   const theme = makeTheme(colors);
+
+  useEffect(() => {
+    if (typeof subDomain === 'undefined') {
+      Router.push('/not-found');
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
@@ -60,11 +69,16 @@ function MyApp({ Component, colors, pageProps }) {
 
 MyApp.getInitialProps = async (appContext) => {
   const subDomain = getSubDomain(appContext.ctx.req);
+  console.log(subDomain);
   // some form of network call to load subdomains
-  const { colors } = subDomains.find(
-    (domain) => domain.subdomain === subDomain,
-  );
-  return { colors };
+  let colors = {};
+  if (subDomain) {
+    const { colors: foundColors } = subDomains.find(
+      (domain) => domain.subdomain === subDomain,
+    );
+    colors = foundColors;
+  }
+  return { colors, subDomain };
 };
 
 export default MyApp;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import Button from '../lib/Button';
 
 const navBarStyles = createUseStyles((theme) => ({
   '@global': {
@@ -27,7 +28,7 @@ function NavBar() {
   return (
     <div className={classes.root}>
       <h1>PeopleCorp</h1>
-      <h1>Other Thing</h1>
+      <Button variant="secondary">Call to Action!</Button>
     </div>
   );
 }
