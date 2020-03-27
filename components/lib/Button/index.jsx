@@ -2,23 +2,25 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
-const styles = createUseStyles((theme) => ({
-  root: {
-    background: theme.colors.primary,
-    border: 'none',
-    borderRadius: theme.border.radius,
-    padding: '8px 16px',
-    color: '#fff',
-    fontSize: '1.1rem',
-    cursor: 'pointer',
-  },
-  grey: {
-    background: theme.common.grey,
-  },
-  secondary: {
-    background: theme.colors.secondary,
-  },
-}));
+const styles = createUseStyles((theme) => {
+  return {
+    root: {
+      background: theme.colors.primary,
+      border: 'none',
+      borderRadius: theme.border.radius,
+      padding: '8px 16px',
+      color: '#fff',
+      fontSize: '1.1rem',
+      cursor: 'pointer',
+    },
+    grey: {
+      background: theme.common.grey,
+    },
+    secondary: {
+      background: theme.colors.secondary,
+    },
+  };
+});
 
 function Button({ children, disabled, variant, ...props }) {
   const classes = styles();

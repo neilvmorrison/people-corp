@@ -48,23 +48,25 @@ function makeTheme(colors) {
   return theme;
 }
 
-function MyApp({ Component, colors, pageProps }) {
-  const theme = makeTheme(colors);
-  return (
-    <ThemeProvider theme={theme}>
-      <NavBar />
-      <Component {...pageProps} />
-    </ThemeProvider>
-  );
+export default class MyApp extends App {
+  render() {
+    const { Component, colors, pageProps } = this.props;
+    const theme = makeTheme(colors);
+    return (
+      <ThemeProvider theme={theme}>
+        <NavBar />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    );
+  }
 }
 
 MyApp.getInitialProps = async (appContext) => {
   const subDomain = getSubDomain(appContext.ctx.req);
   // some form of network call to load subdomains
+
   const { colors } = subDomains.find(
     (domain) => domain.subdomain === subDomain,
   );
   return { colors };
 };
-
-export default MyApp;

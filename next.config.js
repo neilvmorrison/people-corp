@@ -6,7 +6,7 @@ const devConfig = {
 
 const prodConfig = {
   env: {
-    domain: 'neat.com',
+    domain: 'boondocks.tech',
   },
 };
 
